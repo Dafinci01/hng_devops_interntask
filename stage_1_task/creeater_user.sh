@@ -55,7 +55,7 @@ if [ ! -f "$USER_DATA_FILE"]; then
 fi
 
 # Check for root privileges 
-if [[$EUID -ne 0 ]]; then
+if [[ $EUID -ne 0 ]]; then
 	echo "This script requires root privileges ." >&2
 	exit 1
 fi
@@ -66,8 +66,9 @@ touch "$LOG_FILE" "PASSWORD_FILE"
 chmod 640 "$PASSWORD_FILE"
 
 #process user data file linwe by line 
-while IFS=';' read -r "$username" "$groups" do
-	create_user "$USER_DATA_FILE"
+while IFS=';' read -r username groups;
+do
+	create_user "username" "groups"
 done < "$USER_DATA_FILE"
 
 echo "User creation completed. Refer to '$LOG_FILE' for details."
