@@ -63,4 +63,3 @@ while IFS=';' read -r username groups; do
 done < "$USER_DATA_FILE"  # Corrected syntax
 
 echo "User creation completed. Refer to '$LOG_FILE' for details."
-
