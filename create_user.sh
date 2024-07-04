@@ -15,6 +15,11 @@ create_user() {
     echo "Error creating group '$username'" >> "$LOG_FILE"
     return 1
   fi
+   # Check if user already exists
+  if id -u "$username" &> /dev/null; then
+    echo "User '$username' already exists. Skipping..." >> "$LOG_FILE"
+    return 1
+  fi
 
   # Create user with home directory and set ownership/permissions
   if ! useradd -m -g "$username" -s /bin/bash "$username" &> /dev/null; then
